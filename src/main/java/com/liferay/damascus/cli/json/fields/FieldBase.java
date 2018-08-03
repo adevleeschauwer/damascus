@@ -51,4 +51,6 @@ public abstract class FieldBase {
 
     public boolean required = false;
 
+    public boolean finder = false;
+
 }
