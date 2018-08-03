@@ -138,21 +138,20 @@ public class TemplateUtil {
 
         //Fetch root path for resources from .damascus first.
         //Damascus uses resource in this jar if no configuration is found in .damascus.
-        String rootPath            = propertyContext.getString(DamascusProps.PROP_RESOURCE_ROOT_PATH);
-        String defaultTemplatePath = DamascusProps.TEMPLATE_FILE_PATH + DamascusProps.SEP + version;
-
+        String rootPath = propertyContext.getString(DamascusProps.PROP_RESOURCE_ROOT_PATH);
         log.debug("getResourceRootPath : rootPath            : " + rootPath);
-        log.debug("getResourceRootPath : defaultTemplatePath : " + defaultTemplatePath);
 
         if (rootPath.equals("")) {
-
-            propertyContext.setProperty(DamascusProps.PROP_RESOURCE_ROOT_PATH, defaultTemplatePath);
-            propertyContext.save();
-
-            System.out.println(DamascusProps.PROP_RESOURCE_ROOT_PATH + " is initilized with <" + defaultTemplatePath + ">");
+            rootPath = DamascusProps.TEMPLATE_FILE_PATH + DamascusProps.SEP + version;
+            log.debug("getResourceRootPath : defaultTemplatePath : " + rootPath);
         }
 
-        return new File(defaultTemplatePath);
+        propertyContext.setProperty(DamascusProps.PROP_RESOURCE_ROOT_PATH, rootPath);
+        propertyContext.save();
+
+        System.out.println(DamascusProps.PROP_RESOURCE_ROOT_PATH + " is initilized with <" + rootPath + ">");
+
+        return new File(rootPath);
     }
 
     /**
