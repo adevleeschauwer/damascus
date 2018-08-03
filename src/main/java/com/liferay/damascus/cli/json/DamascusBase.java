@@ -29,6 +29,9 @@ public class DamascusBase {
     public String packageName;
 
     @JsonProperty(required = true)
+    public String namespace;
+
+    @JsonProperty(required = true)
     public String liferayVersion;
 
     public Map<String, String> customValue;

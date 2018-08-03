@@ -5,7 +5,7 @@
 
 <service-builder package-path="${packageName}">
 
-    <namespace>${camelcaseProjectName}</namespace>
+    <namespace>${damascus.namespace}</namespace>
 
     <#list damascus.applications as app>
 
@@ -15,11 +15,17 @@
         <#-- ---------------- -->
         <#-- field loop start -->
         <#-- ---------------- -->
+        <!-- PK fields -->
         <#list app.fields as field >
-            <#if field.primary?? && field.primary == true >
-        <!-- PK field -->
+            <#if (field.primary)!false >
+        <column name="${field.name}" type="${templateUtil?api.getTypeParameter(field.type?string)}" primary="true" />
             </#if>
-        <column name="${field.name}" type="${templateUtil?api.getTypeParameter(field.type?string)}" <#if field.primary?? && field.primary == true >primary="true"</#if> />
+        </#list>
+
+        <#list app.fields as field >
+            <#if (!field.primary)!true >
+        <column name="${field.name}" type="${templateUtil?api.getTypeParameter(field.type?string)}" />
+            </#if>
         </#list>
         <#-- ---------------- -->
         <#-- field loop ends  -->
