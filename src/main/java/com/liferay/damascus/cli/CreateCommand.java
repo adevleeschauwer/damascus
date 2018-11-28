@@ -253,6 +253,7 @@ public class CreateCommand implements ICommand {
 
             // Generate service.xml based on base.json configurations and overwrite existing service.xml
             generateScaffolding(dmsb, DamascusProps.SERVICE_XML, serviceXmlPath, null);
+            generateScaffolding(dmsb, "Portlet_XXXXROOT_gradle-wrapper.properties.ftl", null, null);
 
             System.out.println("Running \"gradle buildService\" to generate the service based on parsed service.xml");
 
